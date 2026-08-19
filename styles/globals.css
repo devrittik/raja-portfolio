@@ -1,0 +1,311 @@
+@import "tailwindcss";
+
+/* Class-based dark mode (next-themes) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+ * Design tokens — Construction Orange · Steel Blue · Concrete Gray
+ * ------------------------------------------------------------------------- */
+:root {
+  --radius: 0.85rem;
+
+  --background: #f8f7f5;
+  --foreground: #1a1917;
+  --card: #ffffff;
+  --card-foreground: #1a1917;
+  --popover: #ffffff;
+  --popover-foreground: #1a1917;
+
+  --primary: #e8590c; /* construction orange */
+  --primary-foreground: #fff6ef;
+
+  --secondary: #eef0f2;
+  --secondary-foreground: #2f3b4c;
+
+  --muted: #f0efed;
+  --muted-foreground: #6b6762;
+
+  --accent: #33607f; /* steel blue */
+  --accent-foreground: #f2f7fb;
+
+  --brand: #e8590c;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  --border: #e6e3de;
+  --input: #ddd9d2;
+  --ring: #e8590c;
+
+  --shadow-soft: 0 1px 2px rgb(26 25 23 / 0.04), 0 8px 24px -8px rgb(26 25 23 / 0.08);
+  --shadow-lift: 0 2px 4px rgb(26 25 23 / 0.05), 0 20px 48px -12px rgb(26 25 23 / 0.16);
+}
+
+.dark {
+  --background: #0f0e0c;
+  --foreground: #f4f2ef;
+  --card: #181613;
+  --card-foreground: #f4f2ef;
+  --popover: #181613;
+  --popover-foreground: #f4f2ef;
+
+  --primary: #f97316;
+  --primary-foreground: #1c1006;
+
+  --secondary: #242119;
+  --secondary-foreground: #d3d9e0;
+
+  --muted: #1e1b17;
+  --muted-foreground: #a39d96;
+
+  --accent: #7aa7c7;
+  --accent-foreground: #0f1b25;
+
+  --brand: #f97316;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: #29251f;
+  --input: #3a352d;
+  --ring: #f97316;
+
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -8px rgb(0 0 0 / 0.5);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.4), 0 24px 56px -12px rgb(0 0 0 / 0.7);
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-manrope), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-brand: var(--brand);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Fixed brand palettes (theme-independent) */
+  --color-steel-50: #f3f6f8;
+  --color-steel-100: #e3ebf0;
+  --color-steel-200: #c5d6e1;
+  --color-steel-300: #9ab9cb;
+  --color-steel-400: #6995ae;
+  --color-steel-500: #4a7a95;
+  --color-steel-600: #3d6680;
+  --color-steel-700: #335268;
+  --color-steel-800: #2d4557;
+  --color-steel-900: #1c2f3d;
+  --color-steel-950: #0f1b25;
+
+  --color-forest-100: #e2f0e6;
+  --color-forest-200: #bfdfca;
+  --color-forest-500: #2f7d4f;
+  --color-forest-600: #27663f;
+  --color-forest-700: #1f5233;
+  --color-forest-900: #122b1c;
+
+  --color-brand-300: #fdba74;
+  --color-brand-400: #fb923c;
+  --color-brand-500: #f97316;
+  --color-brand-600: #ea580c;
+  --color-brand-700: #c2410c;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-accordion-down: accordion-down 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-accordion-up: accordion-up 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Base
+ * ------------------------------------------------------------------------- */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--primary) 22%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--foreground) 18%, transparent);
+    border-radius: 8px;
+    border: 2px solid var(--background);
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Custom utilities
+ * ------------------------------------------------------------------------- */
+@utility container-shell {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 640px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(100deg, var(--brand-500, #f97316), #fb923c 55%, #facc15);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility glass {
+  background: color-mix(in srgb, var(--card) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+@utility shadow-lift {
+  box-shadow: var(--shadow-lift);
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--foreground) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 5%, transparent) 1px, transparent 1px);
+  background-size: 54px 54px;
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+/* Long-form content (Notion renderer + sample HTML) */
+.prose-content {
+  @apply text-muted-foreground leading-relaxed text-[1.03rem];
+}
+.prose-content h2 {
+  @apply font-display text-foreground text-2xl md:text-[1.75rem] font-bold mt-10 mb-4 tracking-tight scroll-mt-28;
+}
+.prose-content h3 {
+  @apply font-display text-foreground text-xl font-semibold mt-8 mb-3 tracking-tight scroll-mt-28;
+}
+.prose-content p { @apply my-4; }
+.prose-content ul { @apply my-4 ml-1 space-y-2.5 list-none; }
+.prose-content ul li { @apply relative pl-6; }
+.prose-content ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--primary);
+}
+.prose-content ol { @apply my-4 ml-6 list-decimal space-y-2.5; }
+.prose-content strong { @apply text-foreground font-semibold; }
+.prose-content a { @apply text-primary font-medium underline underline-offset-4 decoration-primary/40 hover:decoration-primary; }
+.prose-content blockquote {
+  @apply my-6 border-l-[3px] border-primary/60 bg-secondary/60 rounded-r-xl px-5 py-4 italic;
+}
+.prose-content code { @apply rounded-md bg-secondary px-1.5 py-0.5 text-[0.85em] font-mono text-foreground; }
+.prose-content pre { @apply my-6 overflow-x-auto rounded-xl border border-border bg-steel-950 p-5 text-sm; }
+.prose-content pre code { @apply bg-transparent p-0 text-steel-100; }
+.prose-content img { @apply rounded-2xl my-8; }
+.prose-content hr { @apply my-8 border-border; }
+
+/* ---------------------------------------------------------------------------
+ * Third-party skins (Leaflet / react-notion-x) — token-aware
+ * ------------------------------------------------------------------------- */
+.leaflet-container { font: inherit; background: var(--muted); }
+.leaflet-popup-content-wrapper {
+  background: var(--popover);
+  color: var(--popover-foreground);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lift);
+}
+.leaflet-popup-tip { background: var(--popover); border: 1px solid var(--border); }
+.leaflet-popup-content { margin: 14px 16px; line-height: 1.5; }
+.leaflet-bar {
+  border-radius: 10px !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-soft) !important;
+  overflow: hidden;
+}
+.leaflet-bar a { background: var(--card); color: var(--foreground); border-color: var(--border); }
+
+.notion { font-family: inherit; color: inherit; }
+.notion-page { background: transparent !important; width: 100% !important; padding: 0 !important; }
+.notion-header { display: none; }
+.notion-collection-wrapper { font-size: 0.95rem; }
+
+/* ---------------------------------------------------------------------------
+ * Print-friendly (project sheets + resume)
+ * ------------------------------------------------------------------------- */
+@media print {
+  header, footer, .no-print { display: none !important; }
+  main { padding-top: 0 !important; }
+  body { background: #fff; color: #111; }
+  .print-sheet { max-width: 100% !important; shadow: none !important; }
+  a { color: #111; text-decoration: none; }
+}
