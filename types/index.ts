@@ -210,7 +210,7 @@ export interface SiteSettings {
   location: string;
   mapCenter: [number, number];
   resumeUrl: string;
-  clients?: string[];
+  clients: string[];
   experiences?: string[];
   seo: {
     title: string;
