@@ -9,9 +9,9 @@ export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   return pageMeta({
-    title: "Projects — Bridges, Highways, GIS & Structural Engineering Case Studies",
+    title: "Projects — Civil Engineering, Construction & Geospatial Work",
     description:
-      "Browse the archive: bridge retrofits, highway DPRs, metro viaducts, drone surveys and GIS platforms — every project with its problem, engineering and outcome documented.",
+      "Explore Er. Raja Dey's project experience across industrial construction, Jal Jeevan Mission field work, property valuation, GIS, surveying, and civil engineering.",
     path: "/projects",
   });
 }
@@ -28,14 +28,16 @@ export default async function ProjectsPage({ searchParams }: Props) {
     <>
       <PageHeader
         eyebrow="Project archive"
-        title="The work, on the record."
-        description="Filter by discipline, status or software. Every case study opens with the client's problem and closes with what we learned."
+        title="A record of work and experience."
+        description="Explore selected projects across civil engineering, construction, GIS, surveying, property assessment, and related field work."
         breadcrumbs={[{ label: "Projects", href: "/projects" }]}
       />
+
       <section className="container-shell py-16">
         <ProjectFilters projects={projects} initialCategory={decoded} />
       </section>
-      <CtaBanner title="Don't see your project type? Ask anyway." />
+
+      <CtaBanner title="Have a project or opportunity to discuss?" />
     </>
   );
 }
